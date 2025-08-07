@@ -1,0 +1,18 @@
+int Sensor = 2; // RCWL sensor output connected to digital  pin 2 
+                          int LED = 5;	// LED connected to digital pin 5
+     int flg = 0;	// Flag to track motion detection state
+     void setup() {
+   Serial.begin(9600);	// Start serial communication                                                  pinMode(Sensor, INPUT);	// Set sensor pin as input   pinMode(LED, OUTPUT);		// Set LED pin as   output Serial.println("Waiting for motion...");
+     }
+                          void loop() {
+                          int val = digitalRead(Sensor); // Read sensor value
+if ((val > 0) && (flg == 0)) { digitalWrite(LED, HIGH); // Turn on LED Serial.println("Motion Detected");
+    flg = 1;	// Set flag to indicate motion detected
+    }
+    if (val == 0) {
+digitalWrite(LED, LOW);	// Turn off LED if (flg == 1)                                                                         {
+    Serial.println("No Motion");
+    }
+    flg = 0;	// Reset flag
+    }
+    delay(100); // Small delay to prevent serial spamming
